@@ -1,0 +1,80 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://sprites/Megaman stand01.png" type="Texture" id=1]
+[ext_resource path="res://hero.gd" type="Script" id=2]
+[ext_resource path="res://sprites/mega man runing00.png" type="Texture" id=3]
+[ext_resource path="res://sprites/mega man runing01.png" type="Texture" id=4]
+[ext_resource path="res://sprites/mega man runing02.png" type="Texture" id=5]
+[ext_resource path="res://sprites/Megaman stand00.png" type="Texture" id=6]
+[ext_resource path="res://sprites/Megaman shoot01.png" type="Texture" id=7]
+[ext_resource path="res://sprites/Megaman shoot00.png" type="Texture" id=8]
+[ext_resource path="res://sprites/Megaman jumpt00.png" type="Texture" id=9]
+[ext_resource path="res://sprites/Megaman JUMP SHOOT00 .PNG" type="Texture" id=10]
+[ext_resource path="res://sprites/run shot1.png" type="Texture" id=11]
+[ext_resource path="res://sprites/run shot2.png" type="Texture" id=12]
+[ext_resource path="res://sprites/run shot3.png" type="Texture" id=13]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "idle",
+"speed": 1.5
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "shoot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "run shot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "JUMP SHOOT",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 19.7897, 21.5957 )
+
+[node name="mememan" type="KinematicBody2D"]
+position = Vector2( 356.266, -44.4305 )
+collision_mask = 15
+script = ExtResource( 2 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 6.63489, 8.86015 )
+scale = Vector2( 1.51038, 1.77045 )
+frames = SubResource( 1 )
+animation = "run shot"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 7.06921, 10.1428 )
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -0.307343, 2.45885 )
+current = true
+zoom = Vector2( 0.75, 0.75 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 44.1055, 3.09512 )
+
+[node name="shoot timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+[connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
+[connection signal="timeout" from="shoot timer" to="." method="_on_shoot_timer_timeout"]
