@@ -6,7 +6,7 @@
 [ext_resource path="res://enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://evil mega.tscn" type="PackedScene" id=5]
 
-[node name="Node2D" type="Node2D"]
+[node name="World" type="Node2D"]
 __meta__ = {
 "_edit_horizontal_guides_": [ -274.048 ]
 }
